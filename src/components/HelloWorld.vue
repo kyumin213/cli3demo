@@ -1,58 +1,56 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
-  </div>
+	<div>
+		<span>{{count}}</span>
+		<el-button @click='add'>+</el-button>
+		<el-button @click='decr'>-</el-button>
+		<el-collapse v-model="activeNames">
+			<el-collapse-item title="一致性 Consistency" name="1">
+				<div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
+				<div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+			</el-collapse-item>
+			<el-collapse-item title="反馈 Feedback" name="2">
+				<div>控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；</div>
+				<div>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div>
+			</el-collapse-item>
+			<el-collapse-item title="效率 Efficiency" name="3">
+				<div>简化流程：设计简洁直观的操作流程；</div>
+				<div>清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；</div>
+				<div>帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。</div>
+			</el-collapse-item>
+			<el-collapse-item title="可控 Controllability" name="4">
+				<div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
+				<div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
+			</el-collapse-item>
+		</el-collapse>
+	</div>
 </template>
 
 <script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
-}
+	import store from '../store/index.js'
+	export default {
+		name: 'HelloWorld',
+		data() {
+			return {
+				activeNames: ['1']
+			};
+		},
+		computed:{
+			count(){
+				return store.state.count
+			}
+		},
+		methods: {
+			add(){
+				store.commit('add')
+			},
+			decr(){
+				store.commit('decr')
+			}
+		}
+	}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>
